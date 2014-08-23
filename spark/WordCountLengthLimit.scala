@@ -1,0 +1,6 @@
+val bios = sc.textFile("/spark/biographies.list")
+val counts = bios.flatMap(line => line.split(" "))
+.filter(word => word.length > 5)
+.map(word => (word, 1))
+.reduceByKey(_+_)
+.collect()
